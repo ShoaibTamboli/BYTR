@@ -134,6 +134,230 @@ app.get('/watchlist/delete-watched', (req, res) => {
   res.json(result);
 });
 
+// ------------------------------------HW1----------------------------------
+
+
+// Sample Data:
+
+/*
+Exercise 1: Remove All Unwatched Videos
+Create an endpoint /watchlist/delete-unwatched which will return all the watched videos
+Create a function deleteUnwatchedVideos to filter and return all unwatched videos.
+API Call: http://localhost:3000/watchlist/delete-unwatched
+
+Expected Data:
+[
+  { videoId: 2, title: 'Node.js Basics', watched: true, url: 'https://youtu.be/shorturl2' },
+]
+*/
+
+let watchList1 = [
+  {
+    videoId: 1,
+    title: 'JavaScript Tutorial',
+    watched: false,
+    url: 'https://youtu.be/shorturl1',
+  },
+  {
+    videoId: 2,
+    title: 'Node.js Basics',
+    watched: true,
+    url: 'https://youtu.be/shorturl2',
+  },
+  {
+    videoId: 3,
+    title: 'React.js Guide',
+    watched: false,
+    url: 'https://youtu.be/shorturl3',
+  },
+];
+
+function deleteUnwatchedVideos(watchList) {
+  return watchList.filter((el) => el.watched);
+}
+
+app.get('/watchlist/delete-unwatched', (req, res) => {
+  const result = deleteUnwatchedVideos(watchList1);
+  res.json(result);
+});
+
+/*
+Exercise 2: Mark Video as Favorite by ID
+Create an endpoint /watchlist/favorite to favorite a video by ID.
+Declare variables for videoId and isFavorite to accept input from query parameters.
+Create a function markVideoAsFavorite to update the favorite status of a video by ID.
+API Call: http://localhost:3000/watchlist/favorite?videoId=1&isFavorite=true
+
+Expected output:
+[
+  { 'videoId': 1, 'title': 'JavaScript Tutorial', 'watched': false, 'url': 'https://youtu.be/shorturl1', 'isFavorite': true },
+  { 'videoId': 2, 'title': 'Node.js Basics', 'watched': true, 'url': 'https://youtu.be/shorturl2', 'isFavorite': false },
+  { 'videoId': 3, 'title': 'React.js Guide', 'watched': false, 'url': 'https://youtu.be/shorturl3', 'isFavorite': false }
+]
+*/
+
+let watchList11 = [
+  {
+    videoId: 1,
+    title: 'JavaScript Tutorial',
+    watched: false,
+    url: 'https://youtu.be/shorturl1',
+    isFavorite: false,
+  },
+  {
+    videoId: 2,
+    title: 'Node.js Basics',
+    watched: true,
+    url: 'https://youtu.be/shorturl2',
+    isFavorite: false,
+  },
+  {
+    videoId: 3,
+    title: 'React.js Guide',
+    watched: false,
+    url: 'https://youtu.be/shorturl3',
+    isFavorite: false,
+  },
+];
+
+function markVideoAsFavorite(watchList11, videoId, isFavourite) {
+  for (let i = 0; i < watchList11.length; i++) {
+    if (watchList11[i].videoId === videoId) {
+      watchList11[i].isFavorite = isFavourite;
+      break;
+    }
+  }
+  return watchList11;
+}
+
+app.get('/watchlist/favorite', (req, res) => {
+  const videoId = parseInt(req.query.videoId);
+  let isFavorite = req.query.isFavorite;
+
+  if (isFavorite === 'true') {
+    isFavorite = true;
+  } else if (isFavorite === 'false') {
+    isFavorite = false;
+  }
+
+  const result = markVideoAsFavorite(watchList11, videoId, isFavorite);
+  res.json(result);
+});
+/*
+Example 3: Update Task Status by ID
+Create an endpoint /tasks/update to update the status of a task
+Declare taskId and completed variables to accept input from query parameters.
+Create a function updateTaskStatusById to update the status of a task by ID.
+API Call: http://localhost:3000/tasks/update?taskId=1&completed=true
+
+Expected output:
+[
+  { 'taskId': 1, 'title': 'Buy groceries', 'completed': true },
+  { 'taskId': 2, 'title': 'Walk the dog', 'completed': false },
+  { 'taskId': 3, 'title': 'Do laundry', 'completed': true }
+]
+*/
+
+let tasks = [
+  { taskId: 1, title: 'Buy groceries', completed: false },
+  { taskId: 2, title: 'Walk the dog', completed: false },
+  { taskId: 3, title: 'Do laundry', completed: true },
+];
+
+function updateTaskStatusById(tasks, taskId, completed) {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].taskId === taskId) {
+      tasks[i].completed = completed;
+      break;
+    }
+  }
+  return tasks;
+}
+
+app.get('/tasks/update', (req, res) => {
+  const taskId = parseInt(req.query.taskId);
+  let completed = req.query.completed;
+  if (completed === 'true') {
+    completed = true;
+  } else if (completed === 'false') {
+    completed = false;
+  }
+  const result = updateTaskStatusById(tasks, taskId, completed);
+  res.json(result);
+});
+
+/*
+Example 4: Remove Completed Tasks
+Create an endpoint /tasks/remove-completed to return all the pending tasks
+Create a function removeCompletedTasks to filter out completed tasks.
+API Call: http://localhost:3000/tasks/remove-completed
+
+Expected output:
+[
+  { 'taskId': 1, 'title': 'Buy groceries', 'completed': false },
+  { 'taskId': 2, 'title': 'Walk the dog', 'completed': false }
+]
+*/
+
+let tasks1 = [
+  { taskId: 1, title: 'Buy groceries', completed: false },
+  { taskId: 2, title: 'Walk the dog', completed: false },
+  { taskId: 3, title: 'Do laundry', completed: true },
+];
+
+function removeCompletedTasks(tasks1) {
+  return tasks1.filter((el) => el.completed !== true);
+}
+
+app.get('/tasks/remove-completed', (req, res) => {
+  const result = removeCompletedTasks(tasks1);
+  res.json(result);
+});
+
+/*
+Example 5: Update Library Book Availability by ID
+Create an endpoint /library/update to update the availability of a book
+Declare bookId and available variables to accept input from query parameters.
+Create a function updateBookAvailabilityById to update the availability of a book by ID.
+API call: http://localhost:3000/library/update?bookId=1&available=false
+
+Expected output:
+[
+  { 'bookId': 1, 'title': '1984', 'available': false },
+  { 'bookId': 2, 'title': 'Brave New World', 'available': true },
+  { 'bookId': 3, 'title': 'Fahrenheit 451', 'available': false }
+]
+*/
+
+let books = [
+  { bookId: 1, title: '1984', available: true },
+  { bookId: 2, title: 'Brave New World', available: true },
+  { bookId: 3, title: 'Fahrenheit 451', available: false },
+];
+
+function updateBookAvailabilityById(books, bookId, available) {
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].bookId === bookId) {
+      books[i].available = available;
+      break;
+    }
+  }
+  return books;
+}
+
+app.get('/library/update', (req, res) => {
+  const bookId = parseInt(req.query.bookId);
+  let available = req.query.available;
+
+  if (available === 'true') {
+    available = true;
+  } else if (available === 'false') {
+    available = false;
+  }
+  const result = updateBookAvailabilityById(books, bookId, available);
+  res.json(result);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

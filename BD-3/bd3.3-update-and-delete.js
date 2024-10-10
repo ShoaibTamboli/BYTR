@@ -358,6 +358,127 @@ app.get('/library/update', (req, res) => {
   res.json(result);
 });
 
+//-----------------HW2---------------------------------------------------------------------
+
+const express = require('express');
+const { resolve } = require('path');
+
+const app = express();
+const port = 3000;
+
+/*
+Example 1: Remove Out of Stock Products
+Create an endpoint /products/remove-out-of-stock to return all the products currently in stock & remove the products that are out of stock
+Create a function removeOutOfStockProducts to filter out products that are out of stock.
+API Call: http://localhost:3000/products/remove-out-of-stock
+Sample data:
+
+let products = [
+  { productId: 1, name: 'Laptop', inStock: true },
+  { productId: 2, name: 'Phone', inStock: true },
+  { productId: 3, name: 'Tablet', inStock: false }
+];
+
+Expected output:
+[
+  { 'productId': 1, 'name': 'Laptop', 'inStock': true },
+  { 'productId': 2, 'name': 'Phone', 'inStock': true }
+]
+*/
+
+/*
+Example 2: Update Employee Active Status by ID
+Create an endpoint /employees/update to update the status of an employee
+Declare employeeId and active variables.
+Create a function updateEmployeeStatusById to update the status of an employee by ID.
+API call: http://localhost:3000>/employees/update?employeeId=1&active=false
+
+Sample data:
+let employees = [
+  { employeeId: 1, name: 'Alice', active: true },
+  { employeeId: 2, name: 'Bob', active: true },
+  { employeeId: 3, name: 'Charlie', active: false }
+];
+
+Expected output:
+[
+  { 'employeeId': 1, 'name': 'Alice', 'active': false },
+  { 'employeeId': 2, 'name': 'Bob', 'active': true },
+  { 'employeeId': 3, 'name': 'Charlie', 'active': false }
+]
+
+*/
+
+/* 
+Example 3: Update Order Delivery Status by ID
+Create an endpoint /orders/update to update the delivery status of an order
+Declare orderId and delivered variables to accept input from query parameters.
+Create a function updateOrderStatusById to update the status of an order by ID.
+API call: http://localhost:3000/orders/update?orderId=1&delivered=true
+
+Sample data:
+
+let orders = [
+  { orderId: 1, product: 'Laptop', delivered: false },
+  { orderId: 2, product: 'Phone', delivered: true },
+  { orderId: 3, product: 'Tablet', delivered: false }
+];
+
+Expected output:
+[
+  { 'orderId': 1, 'product': 'Laptop', 'delivered': true },
+  { 'orderId': 2, 'product': 'Phone', 'delivered': true },
+  { 'orderId': 3, 'product': 'Tablet', 'delivered': false }
+]
+
+*/
+
+/*
+Example 4: Remove Unconfirmed Reservations
+Create an endpoint /reservations/remove-unconfirmed to remove unconfirmed reservations & return only the confirmed ones.
+Create a function removeUnconfirmedReservations to filter out unconfirmed reservations.
+
+API call: http://localhost:3000/reservations/remove-unconfirmed
+
+Sample data:
+
+let reservations = [
+  { reservationId: 1, name: 'John', confirmed: false },
+  { reservationId: 2, name: 'Jane', confirmed: true },
+  { reservationId: 3, name: 'Jack', confirmed: false }
+];
+
+Expected output:
+[
+  { 'reservationId': 2, 'name': 'Jane', 'confirmed': true }
+]
+*/
+
+/* 
+Example 5: Update Subscription Status by ID
+Create an endpoint /subscriptions/update to update the status of a subscription.
+Declare subscriptionId and active variables to accept input from query parameters.
+Create a function updateSubscriptionStatusById to update the status of a subscription by ID.
+API Call: http://localhost:3000/subscriptions/update?subscriptionId=1&active=true
+Sample data:
+let subscriptions = [
+  { subscriptionId: 1, service: 'Netflix', active: false },
+  { subscriptionId: 2, service: 'Spotify', active: true },
+  { subscriptionId: 3, service: 'Amazon Prime', active: false }
+];
+
+Expected output:
+[
+  { 'subscriptionId': 1, 'service': 'Netflix', 'active': true },
+  { 'subscriptionId': 2, 'service': 'Spotify', 'active': true },
+  { 'subscriptionId': 3, 'service': 'Amazon Prime', 'active': false }
+]
+*/
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

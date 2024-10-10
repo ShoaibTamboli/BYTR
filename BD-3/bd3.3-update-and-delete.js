@@ -359,13 +359,6 @@ app.get('/library/update', (req, res) => {
 });
 
 //-----------------HW2---------------------------------------------------------------------
-
-const express = require('express');
-const { resolve } = require('path');
-
-const app = express();
-const port = 3000;
-
 /*
 Example 1: Remove Out of Stock Products
 Create an endpoint /products/remove-out-of-stock to return all the products currently in stock & remove the products that are out of stock
@@ -385,6 +378,21 @@ Expected output:
   { 'productId': 2, 'name': 'Phone', 'inStock': true }
 ]
 */
+const products = [
+  { productId: 1, name: 'Laptop', inStock: true },
+  { productId: 2, name: 'Phone', inStock: true },
+  { productId: 3, name: 'Tablet', inStock: false },
+];
+
+function removeOutOfStockProducts(products) {
+  return products.filter((e) => e.inStock);
+}
+
+app.get('/products/remove-out-of-stock', (req, res) => {
+  const result = removeOutOfStockProducts(products);
+  res.json(result);
+});
+
 
 /*
 Example 2: Update Employee Active Status by ID

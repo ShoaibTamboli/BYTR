@@ -80,6 +80,23 @@ Expected Output:
 
 */
 
+function editCartItems(cart, productId, quantity) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].productId === productId) {
+      cart[i].quantity = quantity;
+      break;
+    }
+  }
+  return cart;
+}
+
+app.get('/cart/edit', (req, res) => {
+  const productId = parseInt(req.query.productId);
+  const quantity = parseInt(req.query.quantity);
+  const carItems = editCartItems(cart, productId, quantity);
+  res.json({ carItems });
+});
+
 /*
 Endpoint 3: Delete an Item from the Cart
 Objective: Delete an item from the cart based on the product ID.
@@ -99,6 +116,16 @@ Expected Output:
 }
 */
 
+function removeItemFromCart(elem, productId) {
+  return elem.productId !== productId;
+}
+
+app.get('/cart/delete', (req, res) => {
+  const productId = parseInt(req.query.productId);
+  const cartItems = cart.filter((e) => removeItemFromCart(e, productId));
+  res.json({ cartItems });
+});
+
 /* 
 Endpoint 4: Read Items in the Cart
 Objective: Return the current list of items in the cart.
@@ -115,6 +142,15 @@ Expected Output:
 }
 */
 
+function getAllCartItems(cart) {
+  return cart;
+}
+
+app.get('/cart', (req, res) => {
+  const cartItems = getAllCartItems(cart);
+  res.json({ cartItems });
+});
+
 /*
 Endpoint 5: Calculate Total Quantity of Items in the Cart
 Objective: Calculate and return the total quantity of items in the cart.
@@ -126,6 +162,21 @@ Expected Output:
 { 'totalQuantity': 3 }
 */
 
+function calculateCartLength(cart) {
+  let totalquantity = 0;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].quantity) {
+      totalquantity += cart[i].quantity;
+    }
+  }
+  return totalquantity;
+}
+
+app.get('/cart/total-quantity', (req, res) => {
+  const totalQuantity = calculateCartLength(cart);
+  res.json({ totalQuantity });
+});
+
 /* 
 Endpoint 6: Calculate Total Price of Items in the Cart
 Objective: Calculate and return the total price of items in the cart based on their quantities and individual prices.
@@ -136,6 +187,19 @@ http://localhost:3000/cart/total-price
 Expected Output:
 { 'totalPrice': 90000 }
 */
+
+function calculateTotalPrice(cart) {
+  let totalPrice = 0;
+  for (let i = 0; i < cart.length; i++) {
+    totalPrice += cart[i].price * cart[i].quantity;
+  }
+  return totalPrice;
+}
+
+app.get('/cart/total-price', (req, res) => {
+  const totalPrice = calculateTotalPrice(cart);
+  res.json({ totalPrice });
+});
 
 /*
 A few hints to help you out:

@@ -202,6 +202,10 @@ app.get('/cart/total-price', (req, res) => {
 });
 
 /*
+deployed url: https://shopping-cart-operations-seven.vercel.app/ 
+*/
+
+/*
 A few hints to help you out:
 
 Add an Item to the Cart:

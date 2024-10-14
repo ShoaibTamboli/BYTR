@@ -40,6 +40,7 @@ function getOlderStudents(students) {
 let result = getOlderStudents(students);
 console.log(result);
 
+console.log(`================Exercise 2======================`);
 /* 
 Exercise 2
 
@@ -73,6 +74,9 @@ function lowToHighPrice(producta, productb) {
 
 result = products.sort(lowToHighPrice);
 console.log(result);
+
+console.log(`================Exercise 3======================`);
+
 /* 
 
 Exercise 3
@@ -100,6 +104,8 @@ const employees = [
 
 result = employees.filter((e) => e.department !== 'HR');
 console.log(result);
+
+console.log(`================Exercise 4======================`);
 
 /* 
 
@@ -132,6 +138,8 @@ result = books.find((book) => book.year > 2000);
 console.log(`Title: ${result.title}`);
 console.log(`Author: ${result.author}`);
 console.log(`Year: ${result.year}`);
+
+console.log(`================Exercise 5======================`);
 
 /* 
 Exercise 5
@@ -186,6 +194,8 @@ function updateCarMileage(cars, make, newMileage) {
 updateCarMileage(cars, 'Honda', 35000); 
 */
 
+console.log(`================Exercise 6======================`);
+
 /* 
 Exercise 6
 
@@ -219,7 +229,10 @@ function calculateSales(sales) {
 }
 
 result = calculateSales(sales);
-console.log(result);
+console.log(`Total revenue of sales is ${result}`);
+
+console.log(`================Exercise 7======================`);
+
 /* 
 Exercise 7
 
@@ -256,6 +269,8 @@ function getMovieByTitile(movies) {
   }
 }
 getMovieByTitile(movies);
+
+console.log(`================Exercise 8======================`);
 
 /* 
 Exercise 8

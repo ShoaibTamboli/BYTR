@@ -246,6 +246,17 @@ const movies = [
   { title: 'Movie Four', director: 'Director C', rating: 6 },
 ];
 
+function getMovieByTitile(movies) {
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].director === 'Director A') {
+      console.log(`Title: ${movies[i].title}`);
+      console.log(`Director: ${movies[i].director}`);
+      console.log('');
+    }
+  }
+}
+getMovieByTitile(movies);
+
 /* 
 Exercise 8
 
@@ -257,6 +268,47 @@ Print the scores to the console in the following format using for loops.
 
 Note: Use snake_case naming convention for property names. For example: Eden Gardens will become eden_gardens
 */
+
+const cricketers = [
+  {
+    name: 'Virat',
+    eden_gardens: 72,
+    wankhede_stadium: 88,
+    feroz_shah_kotla: 45,
+    chepauk: 74,
+  },
+  {
+    name: 'Rohit',
+    eden_gardens: 64,
+    wankhede_stadium: 41,
+    feroz_shah_kotla: 68,
+    chepauk: 34,
+  },
+  {
+    name: 'Shikhar',
+    eden_gardens: 54,
+    wankhede_stadium: 38,
+    feroz_shah_kotla: 72,
+    chepauk: 44,
+  },
+  {
+    name: 'Rishabh',
+    eden_gardens: 22,
+    wankhede_stadium: 27,
+    feroz_shah_kotla: 34,
+    chepauk: 51,
+  },
+];
+
+for (let i = 0; i < cricketers.length; i++) {
+  let stats = cricketers[i];
+  console.log(`Cricketer: ${stats.name}`);
+  console.log(`Eden Gardens: ${stats.eden_gardens}`);
+  console.log(`Wankhede Stadium: ${stats.wankhede_stadium}`);
+  console.log(`Feroz Shah Kotla: ${stats.feroz_shah_kotla}`);
+  console.log(`Chepauk: ${stats.chepauk}`);
+  console.log();
+}
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

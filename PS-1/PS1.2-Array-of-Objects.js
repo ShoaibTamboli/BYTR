@@ -6,13 +6,10 @@ const port = 3000;
 
 /*
 Exercise 1
-
 Given an array of objects where each object represents a project with properties for name, duration, and status.
-
 Return the names of all ongoing projects.
 
-Expected output
-
+Expected output:
 ['Project B', 'Project C']
 
 */
@@ -40,13 +37,9 @@ console.log(result);
 console.log(`=======================Exercise 2==============================`);
 /*
 Exercise 2
-
 Given an array of objects where each object represents a city with properties for name, population, and country.
-
 Return all the cities in the country 'USA'.
-
-Expected output
-
+Expected output:
 [
   { name: 'New York', population: 8000000, country: 'USA' },
   { name: 'Los Angeles', population: 4000000, country: 'USA' }
@@ -77,17 +70,13 @@ console.log(`=======================Exercise 3==============================`);
 
 /* 
 Exercise 3
-
 Given an array of objects where each object represents a song with properties for title, artist, and duration.
-
 Return the first song that has a duration of more than 5 minutes.
 
-Expected output
-
+Expected output:
 Title: Song B
 Artist: Artist 2
 Duration: 5.2
-
 */
 
 const songs = [
@@ -104,21 +93,19 @@ function getSong(el, duration) {
 }
 
 result = songs.find((el) => getSong(el, 5));
-console.log(result);
+console.log(`Title: ${result.title}
+Artist: ${result.artist}
+Duration: ${result.duration}
+`);
 
 console.log(`=======================Exercise 4==============================`);
 
 /*
 Exercise 4
-
 Provided an array of objects where each object represents an animal with properties for species, habitat, and population.
-
 Write a function updateAnimalPopulation that updates the population of an animal given its species & newPopulation.
-
-Expected output
-
+Expected output:
 The updated population for Elephant is 5500
-
 */
 
 const animals = [
@@ -128,18 +115,26 @@ const animals = [
   { species: 'Kangaroo', habitat: 'Grassland', population: 10000 },
 ];
 
+function updateAnimalsData(animals, species, newPopulation) {
+  for (let i = 0; i < animals.length; i++) {
+    if (animals[i].species === species) {
+      animals[i].population = newPopulation;
+      console.log(
+        `The updated population for ${animals[i].species} is ${animals[i].population}`
+      );
+    }
+  }
+}
+
+updateAnimalsData(animals, 'Elephant', 5500);
+
 console.log(`=======================Exercise 5==============================`);
 
 /* 
 Exercise 5
-
 Given an array of objects where each object represents a player with properties for name, team, and goals_scored.
-
 Return the names of all players who have scored more than 20 goals.
-
-
-Expected output
-
+Expected output:
 ['Player A', 'Player C']
 */
 
@@ -150,17 +145,19 @@ const players = [
   { name: 'Player D', team: 'Team 3', goals_scored: 15 },
 ];
 
+result = players
+  .filter((el) => el.goals_scored > 20)
+  .map((player) => player.name);
+
+console.log(result);
 console.log(`=======================Exercise 6==============================`);
 
 /*
 Exercise 6
-
 Given an array of objects where each object represents a company with properties for name, industry, and employees.
-
 Return all the companies in the 'Tech' industry.
 
-Expected output
-
+Expected output:
 [
   { name: 'Company A', industry: 'Tech', employees: 500 },
   { name: 'Company C', industry: 'Tech', employees: 700 }
@@ -174,18 +171,17 @@ const companies = [
   { name: 'Company D', industry: 'Healthcare', employees: 400 },
 ];
 
+result = companies.filter((e) => e.industry === 'Tech');
+console.log(result);
+
 console.log(`=======================Exercise 7==============================`);
 
 /*
 Exercise 7
-
 Given an array of objects where each object represents a book with properties for title, author, and pages.
-
 Sort the array of books by pages in descending order.
-
-Expected output
-
-[
+Expected output:
+ [
   { title: 'Book D', author: 'Author 4', pages: 400 },
   { title: 'Book B', author: 'Author 2', pages: 320 },
   { title: 'Book C', author: 'Author 3', pages: 290 },
@@ -201,18 +197,19 @@ const books = [
   { title: 'Book D', author: 'Author 4', pages: 400 },
 ];
 
+function sortByPages(a, b) {
+  return b.pages - a.pages;
+}
+
+result = books.sort((a, b) => sortByPages(a, b));
+console.log(result);
 console.log(`=======================Exercise 8==============================`);
 
 /*
 Exercise 8
-
 Given an array of objects where each object represents a person with properties for name, country, and age.
-
 Return the names of all people who are older than 30 and live in 'India'.
-
-Expected output
-
-['Person A', 'Person C']
+Expected output: ['Person A', 'Person C']
 */
 
 const people = [
@@ -221,6 +218,11 @@ const people = [
   { name: 'Person C', country: 'India', age: 32 },
   { name: 'Person D', country: 'India', age: 24 },
 ];
+
+result = people
+  .filter((e) => e.age > 30 && e.country === 'India')
+  .map((el) => el.name);
+console.log(result);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

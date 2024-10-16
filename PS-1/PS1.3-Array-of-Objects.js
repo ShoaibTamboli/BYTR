@@ -121,6 +121,24 @@ Expected output:
 Alice has the highest average marks of 88.33
 */
 
+function getStudentWithHighestAverageMarks(studentData) {
+  let highestAverage = 0;
+  let topStudent = '';
+  studentData.forEach((e) => {
+    const average = (e.science + e.geography + e.history) / 3;
+    if (average > highestAverage) {
+      highestAverage = average;
+      topStudent = e.studentName;
+    }
+  });
+  console.log(
+    topStudent,
+    'has the highest average marks of ',
+    highestAverage.toFixed(2)
+  );
+}
+getStudentWithHighestAverageMarks(studentData);
+
 console.log('');
 console.log('=================Exercise 5=================');
 console.log('');
@@ -128,13 +146,10 @@ console.log('');
 /*
 
 Exercise 5: Convert Hours to Minutes
-
 Create a function convertToMinutes that takes hours as input.
-
 Convert and return the hours into minutes.
 
 Expected Output:
-
 2 hours = 120 minutes
 */
 

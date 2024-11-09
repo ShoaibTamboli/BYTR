@@ -126,7 +126,3 @@ app.get('/movies/release_year/:year', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
-
-//-------------------------------------------HW1----------------------------------------------
-

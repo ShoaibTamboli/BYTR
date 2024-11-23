@@ -170,6 +170,24 @@ Example Call:
 http://localhost:3000/games/sort-by-rating
 */
 
+async function fetchGamesByRatings() {
+  const query = 'SELECT * FROM games ORDER BY rating DESC';
+  const response = await db.all(query, []);
+  return { games: response };
+}
+
+app.get('/games/sort-by-rating', async (req, res) => {
+  try {
+    const result = await fetchGamesByRatings();
+    if (result.games.length === 0) {
+      return res.status(404).json({ message: 'No Games found' });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /*
 Exercise 6: Get All Players
 
@@ -183,6 +201,24 @@ Example Call:
 
 http://localhost:3000/players
 */
+
+async function fetchAllPlayers() {
+  const query = 'SELECT * FROM players';
+  const response = await db.all(query, []);
+  return { players: response };
+}
+
+app.get('/players', async (req, res) => {
+  try {
+    const result = await fetchAllPlayers();
+    if (result.players.length === 0) {
+      return res.status(404).json({ message: 'No players found' });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
 
 /* 
 Exercise 7: Get Player by ID
@@ -200,6 +236,25 @@ Example Call:
 http://localhost:3000/players/details/1
 */
 
+async function fetchPlayersByID(id) {
+  const query = 'SELECT * FROM players WHERE id = ?';
+  const response = await db.all(query, [id]);
+  return { players: response };
+}
+
+app.get('/players/details/:id', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await fetchPlayersByID(id);
+    if (result.players.length === 0) {
+      return res.status(404).json({ message: 'No players found by id: ' + id });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /* 
 Exercise 8: Get Players by Platform
 
@@ -216,6 +271,27 @@ Example Call:
 http://localhost:3000/players/platform/PC
 */
 
+async function fetchPlayersByplatform(platform) {
+  const query = 'SELECT * FROM players WHERE platform = ?';
+  const response = await db.all(query, [platform]);
+  return { players: response };
+}
+
+app.get('/players/platform/:platform', async (req, res) => {
+  try {
+    const platform = req.params.platform;
+    const result = await fetchPlayersByplatform(platform);
+    if (result.players.length === 0) {
+      return res
+        .status(404)
+        .json({ message: 'No players found by platform: ' + platform });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /*
 Exercise 9: Get Players Sorted by Rating
 
@@ -230,6 +306,24 @@ Example Call:
 http://localhost:3000/players/sort-by-rating
 */
 
+async function ftechPlayerByRating() {
+  const query = 'SELECT * FROM players ORDER BY rating DESC';
+  const response = await db.all(query, []);
+  return { players: response };
+}
+
+app.get('/players/sort-by-rating', async (req, res) => {
+  try {
+    const result = await ftechPlayerByRating();
+    if (result.players.length === 0) {
+      return res.status(404).json({ message: 'No players found' });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /*
 Exercise 10: Get All Tournaments
 
@@ -243,6 +337,24 @@ Example Call:
 
 http://localhost:3000/tournaments
 */
+
+async function fetchAllTournamnents() {
+  const query = 'SELECT * FROM tournaments';
+  const response = await db.all(query, []);
+  return { tournaments: response };
+}
+
+app.get('/tournaments', async (req, res) => {
+  try {
+    const result = await fetchAllTournamnents();
+    if (result.tournaments.length === 0) {
+      return res.status(404).json({ message: 'No tournaments found' });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
 
 /*
 Exercise 11: Get Tournament by ID
@@ -260,6 +372,27 @@ Example Call:
 http://localhost:3000/tournaments/details/1
 */
 
+async function fetchAllTournamnentsByID(id) {
+  const query = 'SELECT * FROM tournaments WHERE id = ?';
+  const response = await db.all(query, [id]);
+  return { tournaments: response };
+}
+
+app.get('/tournaments/details/:id', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await fetchAllTournamnentsByID(id);
+    if (result.tournaments.length === 0) {
+      return res
+        .status(404)
+        .json({ message: 'No tournaments found by id: ' + id });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /*
 Exercise 12: Get Tournaments by Game ID
 
@@ -276,6 +409,27 @@ Example Call:
 http://localhost:3000/tournaments/game/1
 */
 
+async function fetchTournamnentsByGameID(id) {
+  const query = 'SELECT * FROM tournaments WHERE gameId = ?';
+  const response = await db.all(query, [id]);
+  return { tournaments: response };
+}
+
+app.get('/tournaments/game/:id', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await fetchTournamnentsByGameID(id);
+    if (result.tournaments.length === 0) {
+      return res
+        .status(404)
+        .json({ message: 'No tournaments found by id: ' + id });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 /*
 Exercise 13: Get Tournaments Sorted by Prize Pool
 
@@ -289,6 +443,24 @@ Example Call:
 
 http://localhost:3000/tournaments/sort-by-prize-pool
 */
+
+async function fetchTournamentByPoolPrice() {
+  const query = 'SELECT * FROM tournaments ORDER BY prizePool DESC';
+  const response = await db.all(query, []);
+  return { tournaments: response };
+}
+
+app.get('/tournaments/sort-by-prize-pool', async (req, res) => {
+  try {
+    const result = await fetchTournamentByPoolPrice();
+    if (result.tournaments.length === 0) {
+      return res.status(404).json({ message: 'No tournaments found' });
+    }
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
 
 /*
 How to integrate the Backend APIs with the Frontend UI?
